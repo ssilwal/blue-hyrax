@@ -42,7 +42,7 @@ class OpenAIClient:
           "messages": [
             {
                 "role": "system",
-                "content": "You are a proficient AI with a specialty in distilling information into 1 key idea. Your goal is to provide a concise sentence that someone could read to quickly understand what was talked about. If the content contains instructions, propose a solution or a code snippet in python that can solve the problem."
+                "content": "You are a proficient AI with a specialty in distilling information into 1 key idea. Your goal is to be as concise and specific as possible and give 1 sentence that someone could read quickly. If the content contains instructions, propose a solution or a code snippet in python that can solve the problem."
             },
             {
               "role": "user",
@@ -62,10 +62,9 @@ class OpenAIClient:
           ],
           "max_tokens": 300
         }
-        print(f"Received query: {payload['messages']}")#[0]['content'][0]['text']}")
+        print(f"Received query: {payload['messages'][0]['content'][0]['text']}")
 
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-        print(response.json())
         return response.json()
 
     def speech_to_text(self,audio_file):

@@ -1,5 +1,22 @@
+"concise but speicfic"
+                "content": "You are a proficient AI with a specialty in distilling information into 1 key idea. Your goal is to be as concise and specific as possible and give 1 sentence that someone could read quickly. If the content contains instructions, propose a solution or a code snippet in python that can solve the problem."
+
+                You are looking at a website featuring music album reviews, specifically a page for the folk/country album "Light Verse" by Iron & Wine.% 
+"concise as possible"
+                "content": "You are a proficient AI with a specialty in distilling information into 1 key idea. Your goal is to be as concise as possible (fewest words) and give 1 sentence that someone could read to quickly. If the content contains instructions, propose a solution or a code snippet in python that can solve the problem."
+
+This is a screenshot from "Pitchfork," showing music album reviews.%
+(before)
+	You are looking at a screenshot of a music review page, most likely from a website like Pitchfork, featuring an album called "Light Verse" by Iron & Wine, including a brief summary of the album's content and style, written by Stephen M. Deusner.%  (bhyrax) snehasilwal@Snehas-MacBook-Pro test-server % 
+
+
 new prompt:
                 "content": "You are a proficient AI with a specialty in distilling information into 1 key idea. Your goal is to provide a concise sentence that someone could read to quickly understand what was talked about. If the content contains instructions, propose a solution or a code snippet in python that can solve the problem."
+
+This image contains text that describes a coding problem where you must write a function to create a Balanced Binary Search Tree (BST) from a given sorted array, and shows examples of input arrays and the structure of the resulting Balanced BSTs.\n\nTo solve the problem, you should use a recursive approach to find the middle element of the array (which becomes the root of the BST), and then recursively do the same for the left and right subarrays to create the left and right subtrees. Here's a Python function to create a balanced BST from a sorted array:\n\n```python\nclass TreeNode:\n    def __init__(self, key):\n        self.val = key\n        self.left = None\n        self.right = None\n\ndef sortedArrayToBST(nums):\n    if not nums:\n        return None\n\n    mid = len(nums) // 2\n    root = TreeNode(nums[mid])\n    root.left = sortedArrayToBST(nums[:mid])\n    root.right = sortedArrayToBST(nums[mid+1:])\n\n    return root\n```
+
+This function defines a `TreeNode` class, which is a node in the BST, and the `sortedArrayToBST` function that implements the algorithm.
+
 
 
 
