@@ -41,5 +41,18 @@ def multimodal_query():
     response = agent.query_img(img_filepath, transcribed_speech)
     return response['choices'][0]['message']['content']
 
+@app.route("/test_spotify", methods=["POST"])
+def test_spotify():
+    audio_file = request.files['audio']
+    img_file = request.files['img']
+    img_filepath = 'uploads/' + str(uuid.uuid4()) + img_file.filename
+    img_file.save(img_filepath)
+
+    # transcribed_speech = agent.speech_to_text(audio_file)
+    transcribed_speech = "Can you play that song?"
+    response = agent.get_spotify_agent(img_filepath, transcribed_speech)
+    return response
+
+
 if __name__ == '__main__':
     app.run()
