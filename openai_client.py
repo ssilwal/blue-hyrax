@@ -152,6 +152,7 @@ class OpenAIClient:
           "max_tokens": 300
         }
         follow_up_response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=follow_up_payload)
+        print(follow_up_response.json()['choices'][0]['message']['content'].lower())
         if 'yes' in follow_up_response.json()['choices'][0]['message']['content'].lower():
             get_spotify_agent(img,text)
         return response.json()
