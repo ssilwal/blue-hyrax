@@ -55,6 +55,11 @@ class SpotifyAgent:
             if response.status_code == 204:
                 print(f"Playing '{song_name}' by {artist_name}")
                 return(f"Playing '{song_name}' by {artist_name}")
+            else:
+                print(response)
+                print(response.status_code)
+                print(response.json())
+                return response.text
         else:
             print(f"Could not find '{song_name}' by {artist_name}")
             return(f"Could not find '{song_name}' by {artist_name}")
@@ -138,7 +143,7 @@ class OpenAIClient:
               "content": [
                 {
                   "type": "text",
-                  "text": text
+                  "text": "Does this have to do with music?"
                 },
                 {
                   "type": "image_url",
@@ -152,9 +157,12 @@ class OpenAIClient:
           "max_tokens": 300
         }
         follow_up_response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=follow_up_payload)
-        print(follow_up_response.json()['choices'][0]['message']['content'].lower())
+        print(f"Follow up response: {follow_up_response.json()['choices'][0]['message']['content'].lower()}")
+        # print(follow_up_response.json()['choices'][0]['message']['content'].lower())
         if 'yes' in follow_up_response.json()['choices'][0]['message']['content'].lower():
-            get_spotify_agent(img,text)
+            print(self.get_spotify_agent(img,"Who is the artist and album? Help me call self.spotify_agent()"))
+        else:
+            print('Not related to music')
         return response.json()
 
     def get_spotify_agent(self,img,text):
@@ -198,7 +206,7 @@ class OpenAIClient:
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
         response_text = response.json()['choices'][0]['message']['content']
         # response_text= "self.spotify_agent.play_song(\"Iron & Wine\", \"Light Verse\")"
-        print(f"gpt_response: {response_text}")
+        print(f"gpt_response to execute: {response_text}")
 
         @contextlib.contextmanager
         def stdoutIO(stdout=None):
@@ -214,6 +222,7 @@ class OpenAIClient:
             exec(response_text)
         # exec(response_text)
         output = s.getvalue()
+        print(output)
         return output
 
 
